@@ -1,4 +1,4 @@
-package Contest.GameTheory;
+package HackerRank.Contest.GameTheory;
 
 
 import java.util.ArrayList;
