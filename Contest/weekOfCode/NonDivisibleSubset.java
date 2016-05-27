@@ -12,39 +12,66 @@ import java.util.*;
  * @author Rahul
  */
 public class NonDivisibleSubset {
+
+    
+
     public static void main(String[] args) {
-        Scanner sc  = new Scanner(System.in);
-        int n = sc.nextInt();
-        int k = sc.nextInt();
-        int arr[]=new int[n];
-        ArrayList<Integer> al = new ArrayList<>();
+//		System.setIn(new FileInputStream(System.getProperty("user.home") + "/" + "in.txt"));
+
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] a = new int[n];
+        int[] c = new int[n];
+
         for (int i = 0; i < n; i++) {
-            arr[i]=sc.nextInt();
+            a[i] = scanner.nextInt();
         }
-        for (int i = 0; i < n-1; i++) {
-            for (int j = i+1; j < n; j++) {
-                if ((arr[i]+arr[j])%k!=0) {
-                    if (!al.contains(arr[j])) {
-                        al.add(arr[j]);
-                    }
-                    if (!al.contains(arr[i])) {
-                        al.add(arr[i]);
+
+        int[] mod = new int[k];
+
+        for (int i = 0; i < n; i++) {
+            mod[a[i] % k] = mod[a[i] % k] + 1;
+        }
+
+        int mid = k / 2;
+        if (k % 2 == 0) {
+            mid = mid - 1;
+        }
+
+        int count = 0;
+        for (int l = 1; l <= mid; l++) {
+            int r = k - l;
+            System.out.print(l + " vs " + r);
+            if (mod[l] > mod[r]) {
+                for (int i = 0; i < n; i++) {
+                    if (a[i] % k == l) {
+                        count++;
                     }
                 }
-            }
-        }
-//        System.out.println(al);
-//        ArrayList<Integer> b=al;
-        for (int i = 0; i < al.size()-1; i++) {
-            for (int j =i+1; j < al.size(); j++) {
-                if ((al.get(i)+al.get(j))%k==0) {
-                    al.remove(j);
-//                    b.remove(i);
-//                    System.out.println("");
+                System.out.println(" --> " + l);
+            } else {
+                for (int i = 0; i < n; i++) {
+                    if (a[i] % k == r) {
+                        count++;
+                    }
                 }
+                System.out.println(" --> " + r);
             }
+
         }
-//        System.out.println(al.size()>b.size()?al.size():b.size());
-        System.out.println(al.size());
+
+        if (mod[0] > 0) {
+            count++;
+        }
+
+        if (k % 2 == 0 && mod[k / 2] > 0) {
+            count++;
+        }
+
+        System.out.println(count);
+
     }
+
 }
