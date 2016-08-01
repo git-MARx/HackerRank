@@ -64,7 +64,7 @@ class Student extends Person {
     }
 }
 
-  class soution{
+ class soution{
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         String firstName = scan.next();
